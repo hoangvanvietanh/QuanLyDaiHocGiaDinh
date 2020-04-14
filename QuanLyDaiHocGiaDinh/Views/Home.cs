@@ -101,13 +101,13 @@ namespace QuanLyDaiHocGiaDinh
         {
             if (String.Compare(role.Trim(), "employee", true) == 0)
             {
-                UserHome userHome = new UserHome(AccountId);
+                UserHome userHome = new UserHome();
                 userHome.ShowDialog();
                 isLoginAdready(true, userName);
             }
             else if (String.Compare(role.Trim(), "manage", true) == 0)
             {
-                AdminHome adminHome = new AdminHome(AccountId);
+                AdminHome adminHome = new AdminHome();
                 adminHome.ShowDialog();
                 isLoginAdready(true, userName);
             }
@@ -140,5 +140,6 @@ namespace QuanLyDaiHocGiaDinh
         {
             btnLogin.Focus();
         }
+
     }
 }

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraScheduler;
+using System.Data.Linq;
+using QuanLyDaiHocGiaDinh.Model;
 
 namespace QuanLyDaiHocGiaDinh.Views
 {
@@ -71,6 +73,87 @@ namespace QuanLyDaiHocGiaDinh.Views
         private void setVisibleHomeRibbonPage(bool status)
         {
             homeRibbonPage.Visible = status;
+        }
+
+
+        private void panelControl3_Paint(object sender, PaintEventArgs e)
+        {
+       
+
+            using (Model.LinQDataContext db =new Model.LinQDataContext())
+            {
+                dataGridView1.DataSource = from u in db.Employees select u;
+                Services.AccountServices accountServices = new Services.AccountServices();
+                    List<Account> accounts = accountServices.GetAllAccounts();
+                accounts.ForEach(x =>
+                {
+
+
+                    txtEmployeeID.DataBindings.Clear();
+                    txtEmployeeID.DataBindings.Add("TEXT", dataGridView1.DataSource, "EmployeeId").ToString();
+
+                    txtFirstName.DataBindings.Clear();
+                    txtFirstName.DataBindings.Add("TEXT", dataGridView1.DataSource, "FirstName").ToString();
+
+                    txtLastName.DataBindings.Clear();
+                    txtLastName.DataBindings.Add("TEXT", dataGridView1.DataSource, "LastName").ToString();
+
+                    txtFullName.DataBindings.Clear();
+                    txtFullName.DataBindings.Add("TEXT", dataGridView1.DataSource, "FullName").ToString();
+
+                    txtPhoneNumber.DataBindings.Clear();
+                    txtPhoneNumber.DataBindings.Add("TEXT", dataGridView1.DataSource, "PhoneNumber").ToString();
+
+                    txtAddress.DataBindings.Clear();
+                    txtAddress.DataBindings.Add("TEXT", dataGridView1.DataSource, "Address").ToString();
+
+                    txtCity.DataBindings.Clear();
+                    txtCity.DataBindings.Add("TEXT", dataGridView1.DataSource, "City").ToString();
+
+                    txtDistrict.DataBindings.Clear();
+                    txtDistrict.DataBindings.Add("TEXT", dataGridView1.DataSource, "District").ToString();
+
+                    txtEmail.DataBindings.Clear();
+                    txtEmail.DataBindings.Add("TEXT", dataGridView1.DataSource, "Email").ToString();
+
+                    txtHireDate.DataBindings.Clear();
+                    txtHireDate.DataBindings.Add("TEXT", dataGridView1.DataSource, "HireDate").ToString();
+
+                    txtStatus.DataBindings.Clear();
+                    txtStatus.DataBindings.Add("TEXT", dataGridView1.DataSource, "Status").ToString();
+
+                    txtWard.DataBindings.Clear();
+                    txtWard.DataBindings.Add("TEXT", dataGridView1.DataSource, "Ward").ToString();
+                });
+
+            }
+
+        }
+        
+       
+
+        private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+  
+
+        private void btnUpdates_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            UserHomeUpdate userupdate = new UserHomeUpdate();
+            userupdate.ShowDialog();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnChangesPassword_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            UserHomeChangePassword userHomeChangePassword = new UserHomeChangePassword();
+            userHomeChangePassword.ShowDialog();
         }
     }
 }

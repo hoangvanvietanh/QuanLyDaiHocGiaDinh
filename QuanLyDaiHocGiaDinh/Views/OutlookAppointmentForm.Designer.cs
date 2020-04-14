@@ -102,6 +102,7 @@ namespace QuanLyDaiHocGiaDinh.Views
             this.ribbonControl1.ExpandCollapseItem.Id = 0;
             this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbonControl1.ExpandCollapseItem,
+            this.ribbonControl1.SearchEditItem,
             this.btnSaveAndClose,
             this.btnDelete,
             this.barLabel,
@@ -111,8 +112,7 @@ namespace QuanLyDaiHocGiaDinh.Views
             this.btnSave,
             this.btnNext,
             this.btnPrevious,
-            this.btnTimeZones,
-            this.ribbonControl1.SearchEditItem});
+            this.btnTimeZones});
             resources.ApplyResources(this.ribbonControl1, "ribbonControl1");
             this.ribbonControl1.MaxItemId = 2;
             this.ribbonControl1.Name = "ribbonControl1";
