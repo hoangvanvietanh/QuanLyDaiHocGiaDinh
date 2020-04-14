@@ -135,10 +135,10 @@ namespace QuanLyDaiHocGiaDinh.Model
 			return ((ISingleResult<p_selectAllEmployeeResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.p_selectSchedulePersonal")]
-		public void p_selectSchedulePersonal([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AccountId", DbType="Int")] System.Nullable<int> accountId)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.p_selectSchedulePersonal", IsComposable=true)]
+		public object p_selectSchedulePersonal([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AccountId", DbType="Int")] System.Nullable<int> accountId)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), accountId);
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), accountId).ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.p_selectEmployee")]

@@ -103,8 +103,9 @@
       <Column Name="Image" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.p_selectSchedulePersonal" Method="p_selectSchedulePersonal">
+  <Function Name="dbo.p_selectSchedulePersonal" Method="p_selectSchedulePersonal" IsComposable="true">
     <Parameter Name="AccountId" Parameter="accountId" Type="System.Int32" DbType="Int" />
+    <Return Type="object" />
   </Function>
   <Function Name="dbo.p_selectEmployee" Method="p_selectEmployee">
     <Parameter Name="EmployeeId" Parameter="employeeId" Type="System.Int32" DbType="Int" />

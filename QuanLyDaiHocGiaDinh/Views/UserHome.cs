@@ -9,25 +9,33 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraScheduler;
+using QuanLyDaiHocGiaDinh.Services;
+using QuanLyDaiHocGiaDinh.Controller;
+using QuanLyDaiHocGiaDinh.Model;
 
 namespace QuanLyDaiHocGiaDinh.Views
 {
     public partial class UserHome : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        private int AccountId = 0;
-        public UserHome()
-        {
-            InitializeComponent();
-            setVisibleScheduleRibbonPage(false);
-            this.scheduleTableAdapter.Fill(this.giaDinhUniversityDataSet.Schedule, AccountId);
-        }
+        private Account _account;
 
-        public UserHome(int AccountNo)
+        public UserHome(Account account)
         {
-            AccountId = AccountNo;
+            //Ví dụ để lấy employee đang đăng nhập
+            EmployeeService employeeService = new EmployeeService(account);
+            Employee employee = new Employee();
+            employee = employeeService.getEmployeeByAccountId();//lấy employee đang đăng nhập
+            employee.FullName = "Việt Anh Update 3";
+            employee.FirstName = "Việt Nè";
+            employeeService.updateEmployee(employee);//ví dụ về cập nhật
+
+
+            Console.WriteLine(employeeService.getEmployeeByAccountId().FullName);
+            ////////////
+            this._account = account;
             InitializeComponent();
             setVisibleScheduleRibbonPage(false);
-            this.scheduleTableAdapter.Fill(this.giaDinhUniversityDataSet.Schedule, AccountId);
+            this.scheduleTableAdapter.Fill(this.giaDinhUniversityDataSet.Schedule, this._account.AccountId);
         }
 
         void navBarControl_ActiveGroupChanged(object sender, DevExpress.XtraNavBar.NavBarGroupEventArgs e)
@@ -58,7 +66,7 @@ namespace QuanLyDaiHocGiaDinh.Views
 
         private void schedulerControl_InitNewAppointment(object sender, AppointmentEventArgs e)
         {
-            e.Appointment.CustomFields["AccountId"] = AccountId;
+            e.Appointment.CustomFields["AccountId"] = this._account.AccountId;
         }
 
         private void setVisibleScheduleRibbonPage(bool status)
