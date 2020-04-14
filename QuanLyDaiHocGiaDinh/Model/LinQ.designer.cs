@@ -30,12 +30,12 @@ namespace QuanLyDaiHocGiaDinh.Model
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertSchedule(Schedule instance);
-    partial void UpdateSchedule(Schedule instance);
-    partial void DeleteSchedule(Schedule instance);
     partial void InsertAccount(Account instance);
     partial void UpdateAccount(Account instance);
     partial void DeleteAccount(Account instance);
+    partial void InsertResource(Resource instance);
+    partial void UpdateResource(Resource instance);
+    partial void DeleteResource(Resource instance);
     partial void InsertDepartment(Department instance);
     partial void UpdateDepartment(Department instance);
     partial void DeleteDepartment(Department instance);
@@ -45,9 +45,9 @@ namespace QuanLyDaiHocGiaDinh.Model
     partial void InsertPosition(Position instance);
     partial void UpdatePosition(Position instance);
     partial void DeletePosition(Position instance);
-    partial void InsertResource(Resource instance);
-    partial void UpdateResource(Resource instance);
-    partial void DeleteResource(Resource instance);
+    partial void InsertSchedule(Schedule instance);
+    partial void UpdateSchedule(Schedule instance);
+    partial void DeleteSchedule(Schedule instance);
     #endregion
 		
 		public LinQDataContext() : 
@@ -80,19 +80,19 @@ namespace QuanLyDaiHocGiaDinh.Model
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Schedule> Schedules
-		{
-			get
-			{
-				return this.GetTable<Schedule>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Account> Accounts
 		{
 			get
 			{
 				return this.GetTable<Account>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Resource> Resources
+		{
+			get
+			{
+				return this.GetTable<Resource>();
 			}
 		}
 		
@@ -120,547 +120,32 @@ namespace QuanLyDaiHocGiaDinh.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<Resource> Resources
+		public System.Data.Linq.Table<Schedule> Schedules
 		{
 			get
 			{
-				return this.GetTable<Resource>();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Schedule")]
-	public partial class Schedule : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _UniqueID;
-		
-		private System.Nullable<int> _Type;
-		
-		private System.Nullable<System.DateTime> _StartDate;
-		
-		private System.Nullable<System.DateTime> _EndDate;
-		
-		private System.Nullable<bool> _AllDay;
-		
-		private string _Subject;
-		
-		private string _Location;
-		
-		private string _Description;
-		
-		private System.Nullable<int> _Status;
-		
-		private System.Nullable<int> _Label;
-		
-		private System.Nullable<int> _ResourceID;
-		
-		private string _ResourceIDs;
-		
-		private string _ReminderInfo;
-		
-		private string _RecurrenceInfo;
-		
-		private string _TimeZoneId;
-		
-		private string _CustomField1;
-		
-		private System.Nullable<int> _AccountId;
-		
-		private string _DepartmentsList;
-		
-		private string _PositionList;
-		
-		private EntityRef<Account> _Account;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUniqueIDChanging(int value);
-    partial void OnUniqueIDChanged();
-    partial void OnTypeChanging(System.Nullable<int> value);
-    partial void OnTypeChanged();
-    partial void OnStartDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnStartDateChanged();
-    partial void OnEndDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnEndDateChanged();
-    partial void OnAllDayChanging(System.Nullable<bool> value);
-    partial void OnAllDayChanged();
-    partial void OnSubjectChanging(string value);
-    partial void OnSubjectChanged();
-    partial void OnLocationChanging(string value);
-    partial void OnLocationChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    partial void OnStatusChanging(System.Nullable<int> value);
-    partial void OnStatusChanged();
-    partial void OnLabelChanging(System.Nullable<int> value);
-    partial void OnLabelChanged();
-    partial void OnResourceIDChanging(System.Nullable<int> value);
-    partial void OnResourceIDChanged();
-    partial void OnResourceIDsChanging(string value);
-    partial void OnResourceIDsChanged();
-    partial void OnReminderInfoChanging(string value);
-    partial void OnReminderInfoChanged();
-    partial void OnRecurrenceInfoChanging(string value);
-    partial void OnRecurrenceInfoChanged();
-    partial void OnTimeZoneIdChanging(string value);
-    partial void OnTimeZoneIdChanged();
-    partial void OnCustomField1Changing(string value);
-    partial void OnCustomField1Changed();
-    partial void OnAccountIdChanging(System.Nullable<int> value);
-    partial void OnAccountIdChanged();
-    partial void OnDepartmentsListChanging(string value);
-    partial void OnDepartmentsListChanged();
-    partial void OnPositionListChanging(string value);
-    partial void OnPositionListChanged();
-    #endregion
-		
-		public Schedule()
-		{
-			this._Account = default(EntityRef<Account>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UniqueID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int UniqueID
-		{
-			get
-			{
-				return this._UniqueID;
-			}
-			set
-			{
-				if ((this._UniqueID != value))
-				{
-					this.OnUniqueIDChanging(value);
-					this.SendPropertyChanging();
-					this._UniqueID = value;
-					this.SendPropertyChanged("UniqueID");
-					this.OnUniqueIDChanged();
-				}
+				return this.GetTable<Schedule>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="Int")]
-		public System.Nullable<int> Type
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.p_selectAllEmployee")]
+		public ISingleResult<p_selectAllEmployeeResult> p_selectAllEmployee()
 		{
-			get
-			{
-				return this._Type;
-			}
-			set
-			{
-				if ((this._Type != value))
-				{
-					this.OnTypeChanging(value);
-					this.SendPropertyChanging();
-					this._Type = value;
-					this.SendPropertyChanged("Type");
-					this.OnTypeChanged();
-				}
-			}
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<p_selectAllEmployeeResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="SmallDateTime")]
-		public System.Nullable<System.DateTime> StartDate
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.p_selectSchedulePersonal", IsComposable=true)]
+		public object p_selectSchedulePersonal([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AccountId", DbType="Int")] System.Nullable<int> accountId)
 		{
-			get
-			{
-				return this._StartDate;
-			}
-			set
-			{
-				if ((this._StartDate != value))
-				{
-					this.OnStartDateChanging(value);
-					this.SendPropertyChanging();
-					this._StartDate = value;
-					this.SendPropertyChanged("StartDate");
-					this.OnStartDateChanged();
-				}
-			}
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), accountId).ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndDate", DbType="SmallDateTime")]
-		public System.Nullable<System.DateTime> EndDate
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.p_selectEmployee")]
+		public ISingleResult<p_selectEmployeeResult> p_selectEmployee([global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmployeeId", DbType="Int")] System.Nullable<int> employeeId)
 		{
-			get
-			{
-				return this._EndDate;
-			}
-			set
-			{
-				if ((this._EndDate != value))
-				{
-					this.OnEndDateChanging(value);
-					this.SendPropertyChanging();
-					this._EndDate = value;
-					this.SendPropertyChanged("EndDate");
-					this.OnEndDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AllDay", DbType="Bit")]
-		public System.Nullable<bool> AllDay
-		{
-			get
-			{
-				return this._AllDay;
-			}
-			set
-			{
-				if ((this._AllDay != value))
-				{
-					this.OnAllDayChanging(value);
-					this.SendPropertyChanging();
-					this._AllDay = value;
-					this.SendPropertyChanged("AllDay");
-					this.OnAllDayChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Subject", DbType="NVarChar(50)")]
-		public string Subject
-		{
-			get
-			{
-				return this._Subject;
-			}
-			set
-			{
-				if ((this._Subject != value))
-				{
-					this.OnSubjectChanging(value);
-					this.SendPropertyChanging();
-					this._Subject = value;
-					this.SendPropertyChanged("Subject");
-					this.OnSubjectChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Location", DbType="NVarChar(50)")]
-		public string Location
-		{
-			get
-			{
-				return this._Location;
-			}
-			set
-			{
-				if ((this._Location != value))
-				{
-					this.OnLocationChanging(value);
-					this.SendPropertyChanging();
-					this._Location = value;
-					this.SendPropertyChanged("Location");
-					this.OnLocationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(MAX)")]
-		public string Description
-		{
-			get
-			{
-				return this._Description;
-			}
-			set
-			{
-				if ((this._Description != value))
-				{
-					this.OnDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
-		public System.Nullable<int> Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Label", DbType="Int")]
-		public System.Nullable<int> Label
-		{
-			get
-			{
-				return this._Label;
-			}
-			set
-			{
-				if ((this._Label != value))
-				{
-					this.OnLabelChanging(value);
-					this.SendPropertyChanging();
-					this._Label = value;
-					this.SendPropertyChanged("Label");
-					this.OnLabelChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResourceID", DbType="Int")]
-		public System.Nullable<int> ResourceID
-		{
-			get
-			{
-				return this._ResourceID;
-			}
-			set
-			{
-				if ((this._ResourceID != value))
-				{
-					this.OnResourceIDChanging(value);
-					this.SendPropertyChanging();
-					this._ResourceID = value;
-					this.SendPropertyChanged("ResourceID");
-					this.OnResourceIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResourceIDs", DbType="NVarChar(MAX)")]
-		public string ResourceIDs
-		{
-			get
-			{
-				return this._ResourceIDs;
-			}
-			set
-			{
-				if ((this._ResourceIDs != value))
-				{
-					this.OnResourceIDsChanging(value);
-					this.SendPropertyChanging();
-					this._ResourceIDs = value;
-					this.SendPropertyChanged("ResourceIDs");
-					this.OnResourceIDsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReminderInfo", DbType="NVarChar(MAX)")]
-		public string ReminderInfo
-		{
-			get
-			{
-				return this._ReminderInfo;
-			}
-			set
-			{
-				if ((this._ReminderInfo != value))
-				{
-					this.OnReminderInfoChanging(value);
-					this.SendPropertyChanging();
-					this._ReminderInfo = value;
-					this.SendPropertyChanged("ReminderInfo");
-					this.OnReminderInfoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecurrenceInfo", DbType="NVarChar(MAX)")]
-		public string RecurrenceInfo
-		{
-			get
-			{
-				return this._RecurrenceInfo;
-			}
-			set
-			{
-				if ((this._RecurrenceInfo != value))
-				{
-					this.OnRecurrenceInfoChanging(value);
-					this.SendPropertyChanging();
-					this._RecurrenceInfo = value;
-					this.SendPropertyChanged("RecurrenceInfo");
-					this.OnRecurrenceInfoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeZoneId", DbType="NVarChar(MAX)")]
-		public string TimeZoneId
-		{
-			get
-			{
-				return this._TimeZoneId;
-			}
-			set
-			{
-				if ((this._TimeZoneId != value))
-				{
-					this.OnTimeZoneIdChanging(value);
-					this.SendPropertyChanging();
-					this._TimeZoneId = value;
-					this.SendPropertyChanged("TimeZoneId");
-					this.OnTimeZoneIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomField1", DbType="NVarChar(MAX)")]
-		public string CustomField1
-		{
-			get
-			{
-				return this._CustomField1;
-			}
-			set
-			{
-				if ((this._CustomField1 != value))
-				{
-					this.OnCustomField1Changing(value);
-					this.SendPropertyChanging();
-					this._CustomField1 = value;
-					this.SendPropertyChanged("CustomField1");
-					this.OnCustomField1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountId", DbType="Int")]
-		public System.Nullable<int> AccountId
-		{
-			get
-			{
-				return this._AccountId;
-			}
-			set
-			{
-				if ((this._AccountId != value))
-				{
-					if (this._Account.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnAccountIdChanging(value);
-					this.SendPropertyChanging();
-					this._AccountId = value;
-					this.SendPropertyChanged("AccountId");
-					this.OnAccountIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentsList", DbType="NVarChar(200)")]
-		public string DepartmentsList
-		{
-			get
-			{
-				return this._DepartmentsList;
-			}
-			set
-			{
-				if ((this._DepartmentsList != value))
-				{
-					this.OnDepartmentsListChanging(value);
-					this.SendPropertyChanging();
-					this._DepartmentsList = value;
-					this.SendPropertyChanged("DepartmentsList");
-					this.OnDepartmentsListChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PositionList", DbType="NVarChar(200)")]
-		public string PositionList
-		{
-			get
-			{
-				return this._PositionList;
-			}
-			set
-			{
-				if ((this._PositionList != value))
-				{
-					this.OnPositionListChanging(value);
-					this.SendPropertyChanging();
-					this._PositionList = value;
-					this.SendPropertyChanged("PositionList");
-					this.OnPositionListChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_Schedule", Storage="_Account", ThisKey="AccountId", OtherKey="AccountId", IsForeignKey=true)]
-		public Account Account
-		{
-			get
-			{
-				return this._Account.Entity;
-			}
-			set
-			{
-				Account previousValue = this._Account.Entity;
-				if (((previousValue != value) 
-							|| (this._Account.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Account.Entity = null;
-						previousValue.Schedules.Remove(this);
-					}
-					this._Account.Entity = value;
-					if ((value != null))
-					{
-						value.Schedules.Add(this);
-						this._AccountId = value.AccountId;
-					}
-					else
-					{
-						this._AccountId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Account");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), employeeId);
+			return ((ISingleResult<p_selectEmployeeResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -680,9 +165,9 @@ namespace QuanLyDaiHocGiaDinh.Model
 		
 		private string _Role;
 		
-		private EntitySet<Schedule> _Schedules;
-		
 		private EntitySet<Employee> _Employees;
+		
+		private EntitySet<Schedule> _Schedules;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -702,8 +187,8 @@ namespace QuanLyDaiHocGiaDinh.Model
 		
 		public Account()
 		{
-			this._Schedules = new EntitySet<Schedule>(new Action<Schedule>(this.attach_Schedules), new Action<Schedule>(this.detach_Schedules));
 			this._Employees = new EntitySet<Employee>(new Action<Employee>(this.attach_Employees), new Action<Employee>(this.detach_Employees));
+			this._Schedules = new EntitySet<Schedule>(new Action<Schedule>(this.attach_Schedules), new Action<Schedule>(this.detach_Schedules));
 			OnCreated();
 		}
 		
@@ -807,19 +292,6 @@ namespace QuanLyDaiHocGiaDinh.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_Schedule", Storage="_Schedules", ThisKey="AccountId", OtherKey="AccountId")]
-		public EntitySet<Schedule> Schedules
-		{
-			get
-			{
-				return this._Schedules;
-			}
-			set
-			{
-				this._Schedules.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_Employee", Storage="_Employees", ThisKey="AccountId", OtherKey="AccountId")]
 		public EntitySet<Employee> Employees
 		{
@@ -830,6 +302,19 @@ namespace QuanLyDaiHocGiaDinh.Model
 			set
 			{
 				this._Employees.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_Schedule", Storage="_Schedules", ThisKey="AccountId", OtherKey="AccountId")]
+		public EntitySet<Schedule> Schedules
+		{
+			get
+			{
+				return this._Schedules;
+			}
+			set
+			{
+				this._Schedules.Assign(value);
 			}
 		}
 		
@@ -853,6 +338,18 @@ namespace QuanLyDaiHocGiaDinh.Model
 			}
 		}
 		
+		private void attach_Employees(Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.Account = this;
+		}
+		
+		private void detach_Employees(Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.Account = null;
+		}
+		
 		private void attach_Schedules(Schedule entity)
 		{
 			this.SendPropertyChanging();
@@ -864,17 +361,187 @@ namespace QuanLyDaiHocGiaDinh.Model
 			this.SendPropertyChanging();
 			entity.Account = null;
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Resources")]
+	public partial class Resource : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		private void attach_Employees(Employee entity)
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _UniqueID;
+		
+		private int _ResourceID;
+		
+		private string _ResourceName;
+		
+		private System.Nullable<int> _Color;
+		
+		private System.Data.Linq.Binary _Image;
+		
+		private string _CustomField1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUniqueIDChanging(int value);
+    partial void OnUniqueIDChanged();
+    partial void OnResourceIDChanging(int value);
+    partial void OnResourceIDChanged();
+    partial void OnResourceNameChanging(string value);
+    partial void OnResourceNameChanged();
+    partial void OnColorChanging(System.Nullable<int> value);
+    partial void OnColorChanged();
+    partial void OnImageChanging(System.Data.Linq.Binary value);
+    partial void OnImageChanged();
+    partial void OnCustomField1Changing(string value);
+    partial void OnCustomField1Changed();
+    #endregion
+		
+		public Resource()
 		{
-			this.SendPropertyChanging();
-			entity.Account = this;
+			OnCreated();
 		}
 		
-		private void detach_Employees(Employee entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UniqueID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int UniqueID
 		{
-			this.SendPropertyChanging();
-			entity.Account = null;
+			get
+			{
+				return this._UniqueID;
+			}
+			set
+			{
+				if ((this._UniqueID != value))
+				{
+					this.OnUniqueIDChanging(value);
+					this.SendPropertyChanging();
+					this._UniqueID = value;
+					this.SendPropertyChanged("UniqueID");
+					this.OnUniqueIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResourceID", DbType="Int NOT NULL")]
+		public int ResourceID
+		{
+			get
+			{
+				return this._ResourceID;
+			}
+			set
+			{
+				if ((this._ResourceID != value))
+				{
+					this.OnResourceIDChanging(value);
+					this.SendPropertyChanging();
+					this._ResourceID = value;
+					this.SendPropertyChanged("ResourceID");
+					this.OnResourceIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResourceName", DbType="NVarChar(50)")]
+		public string ResourceName
+		{
+			get
+			{
+				return this._ResourceName;
+			}
+			set
+			{
+				if ((this._ResourceName != value))
+				{
+					this.OnResourceNameChanging(value);
+					this.SendPropertyChanging();
+					this._ResourceName = value;
+					this.SendPropertyChanged("ResourceName");
+					this.OnResourceNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="Int")]
+		public System.Nullable<int> Color
+		{
+			get
+			{
+				return this._Color;
+			}
+			set
+			{
+				if ((this._Color != value))
+				{
+					this.OnColorChanging(value);
+					this.SendPropertyChanging();
+					this._Color = value;
+					this.SendPropertyChanged("Color");
+					this.OnColorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image", DbType="Image", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary Image
+		{
+			get
+			{
+				return this._Image;
+			}
+			set
+			{
+				if ((this._Image != value))
+				{
+					this.OnImageChanging(value);
+					this.SendPropertyChanging();
+					this._Image = value;
+					this.SendPropertyChanged("Image");
+					this.OnImageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomField1", DbType="NVarChar(MAX)")]
+		public string CustomField1
+		{
+			get
+			{
+				return this._CustomField1;
+			}
+			set
+			{
+				if ((this._CustomField1 != value))
+				{
+					this.OnCustomField1Changing(value);
+					this.SendPropertyChanging();
+					this._CustomField1 = value;
+					this.SendPropertyChanged("CustomField1");
+					this.OnCustomField1Changed();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -1675,23 +1342,51 @@ namespace QuanLyDaiHocGiaDinh.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Resources")]
-	public partial class Resource : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Schedule")]
+	public partial class Schedule : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _UniqueID;
 		
-		private int _ResourceID;
+		private System.Nullable<int> _Type;
 		
-		private string _ResourceName;
+		private System.Nullable<System.DateTime> _StartDate;
 		
-		private System.Nullable<int> _Color;
+		private System.Nullable<System.DateTime> _EndDate;
 		
-		private System.Data.Linq.Binary _Image;
+		private System.Nullable<bool> _AllDay;
+		
+		private string _Subject;
+		
+		private string _Location;
+		
+		private string _Description;
+		
+		private System.Nullable<int> _Status;
+		
+		private System.Nullable<int> _Label;
+		
+		private System.Nullable<int> _ResourceID;
+		
+		private string _ResourceIDs;
+		
+		private string _ReminderInfo;
+		
+		private string _RecurrenceInfo;
+		
+		private string _TimeZoneId;
 		
 		private string _CustomField1;
+		
+		private System.Nullable<int> _AccountId;
+		
+		private string _DepartmentsList;
+		
+		private string _PositionList;
+		
+		private EntityRef<Account> _Account;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1699,20 +1394,47 @@ namespace QuanLyDaiHocGiaDinh.Model
     partial void OnCreated();
     partial void OnUniqueIDChanging(int value);
     partial void OnUniqueIDChanged();
-    partial void OnResourceIDChanging(int value);
+    partial void OnTypeChanging(System.Nullable<int> value);
+    partial void OnTypeChanged();
+    partial void OnStartDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnStartDateChanged();
+    partial void OnEndDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnEndDateChanged();
+    partial void OnAllDayChanging(System.Nullable<bool> value);
+    partial void OnAllDayChanged();
+    partial void OnSubjectChanging(string value);
+    partial void OnSubjectChanged();
+    partial void OnLocationChanging(string value);
+    partial void OnLocationChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnStatusChanging(System.Nullable<int> value);
+    partial void OnStatusChanged();
+    partial void OnLabelChanging(System.Nullable<int> value);
+    partial void OnLabelChanged();
+    partial void OnResourceIDChanging(System.Nullable<int> value);
     partial void OnResourceIDChanged();
-    partial void OnResourceNameChanging(string value);
-    partial void OnResourceNameChanged();
-    partial void OnColorChanging(System.Nullable<int> value);
-    partial void OnColorChanged();
-    partial void OnImageChanging(System.Data.Linq.Binary value);
-    partial void OnImageChanged();
+    partial void OnResourceIDsChanging(string value);
+    partial void OnResourceIDsChanged();
+    partial void OnReminderInfoChanging(string value);
+    partial void OnReminderInfoChanged();
+    partial void OnRecurrenceInfoChanging(string value);
+    partial void OnRecurrenceInfoChanged();
+    partial void OnTimeZoneIdChanging(string value);
+    partial void OnTimeZoneIdChanged();
     partial void OnCustomField1Changing(string value);
     partial void OnCustomField1Changed();
+    partial void OnAccountIdChanging(System.Nullable<int> value);
+    partial void OnAccountIdChanged();
+    partial void OnDepartmentsListChanging(string value);
+    partial void OnDepartmentsListChanged();
+    partial void OnPositionListChanging(string value);
+    partial void OnPositionListChanged();
     #endregion
 		
-		public Resource()
+		public Schedule()
 		{
+			this._Account = default(EntityRef<Account>);
 			OnCreated();
 		}
 		
@@ -1736,8 +1458,188 @@ namespace QuanLyDaiHocGiaDinh.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResourceID", DbType="Int NOT NULL")]
-		public int ResourceID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="Int")]
+		public System.Nullable<int> Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this.OnTypeChanging(value);
+					this.SendPropertyChanging();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> StartDate
+		{
+			get
+			{
+				return this._StartDate;
+			}
+			set
+			{
+				if ((this._StartDate != value))
+				{
+					this.OnStartDateChanging(value);
+					this.SendPropertyChanging();
+					this._StartDate = value;
+					this.SendPropertyChanged("StartDate");
+					this.OnStartDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndDate", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> EndDate
+		{
+			get
+			{
+				return this._EndDate;
+			}
+			set
+			{
+				if ((this._EndDate != value))
+				{
+					this.OnEndDateChanging(value);
+					this.SendPropertyChanging();
+					this._EndDate = value;
+					this.SendPropertyChanged("EndDate");
+					this.OnEndDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AllDay", DbType="Bit")]
+		public System.Nullable<bool> AllDay
+		{
+			get
+			{
+				return this._AllDay;
+			}
+			set
+			{
+				if ((this._AllDay != value))
+				{
+					this.OnAllDayChanging(value);
+					this.SendPropertyChanging();
+					this._AllDay = value;
+					this.SendPropertyChanged("AllDay");
+					this.OnAllDayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Subject", DbType="NVarChar(50)")]
+		public string Subject
+		{
+			get
+			{
+				return this._Subject;
+			}
+			set
+			{
+				if ((this._Subject != value))
+				{
+					this.OnSubjectChanging(value);
+					this.SendPropertyChanging();
+					this._Subject = value;
+					this.SendPropertyChanged("Subject");
+					this.OnSubjectChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Location", DbType="NVarChar(50)")]
+		public string Location
+		{
+			get
+			{
+				return this._Location;
+			}
+			set
+			{
+				if ((this._Location != value))
+				{
+					this.OnLocationChanging(value);
+					this.SendPropertyChanging();
+					this._Location = value;
+					this.SendPropertyChanged("Location");
+					this.OnLocationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(MAX)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
+		public System.Nullable<int> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Label", DbType="Int")]
+		public System.Nullable<int> Label
+		{
+			get
+			{
+				return this._Label;
+			}
+			set
+			{
+				if ((this._Label != value))
+				{
+					this.OnLabelChanging(value);
+					this.SendPropertyChanging();
+					this._Label = value;
+					this.SendPropertyChanged("Label");
+					this.OnLabelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResourceID", DbType="Int")]
+		public System.Nullable<int> ResourceID
 		{
 			get
 			{
@@ -1756,62 +1658,82 @@ namespace QuanLyDaiHocGiaDinh.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResourceName", DbType="NVarChar(50)")]
-		public string ResourceName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResourceIDs", DbType="NVarChar(MAX)")]
+		public string ResourceIDs
 		{
 			get
 			{
-				return this._ResourceName;
+				return this._ResourceIDs;
 			}
 			set
 			{
-				if ((this._ResourceName != value))
+				if ((this._ResourceIDs != value))
 				{
-					this.OnResourceNameChanging(value);
+					this.OnResourceIDsChanging(value);
 					this.SendPropertyChanging();
-					this._ResourceName = value;
-					this.SendPropertyChanged("ResourceName");
-					this.OnResourceNameChanged();
+					this._ResourceIDs = value;
+					this.SendPropertyChanged("ResourceIDs");
+					this.OnResourceIDsChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="Int")]
-		public System.Nullable<int> Color
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReminderInfo", DbType="NVarChar(MAX)")]
+		public string ReminderInfo
 		{
 			get
 			{
-				return this._Color;
+				return this._ReminderInfo;
 			}
 			set
 			{
-				if ((this._Color != value))
+				if ((this._ReminderInfo != value))
 				{
-					this.OnColorChanging(value);
+					this.OnReminderInfoChanging(value);
 					this.SendPropertyChanging();
-					this._Color = value;
-					this.SendPropertyChanged("Color");
-					this.OnColorChanged();
+					this._ReminderInfo = value;
+					this.SendPropertyChanged("ReminderInfo");
+					this.OnReminderInfoChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image", DbType="Image", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary Image
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecurrenceInfo", DbType="NVarChar(MAX)")]
+		public string RecurrenceInfo
 		{
 			get
 			{
-				return this._Image;
+				return this._RecurrenceInfo;
 			}
 			set
 			{
-				if ((this._Image != value))
+				if ((this._RecurrenceInfo != value))
 				{
-					this.OnImageChanging(value);
+					this.OnRecurrenceInfoChanging(value);
 					this.SendPropertyChanging();
-					this._Image = value;
-					this.SendPropertyChanged("Image");
-					this.OnImageChanged();
+					this._RecurrenceInfo = value;
+					this.SendPropertyChanged("RecurrenceInfo");
+					this.OnRecurrenceInfoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeZoneId", DbType="NVarChar(MAX)")]
+		public string TimeZoneId
+		{
+			get
+			{
+				return this._TimeZoneId;
+			}
+			set
+			{
+				if ((this._TimeZoneId != value))
+				{
+					this.OnTimeZoneIdChanging(value);
+					this.SendPropertyChanging();
+					this._TimeZoneId = value;
+					this.SendPropertyChanged("TimeZoneId");
+					this.OnTimeZoneIdChanged();
 				}
 			}
 		}
@@ -1836,6 +1758,104 @@ namespace QuanLyDaiHocGiaDinh.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountId", DbType="Int")]
+		public System.Nullable<int> AccountId
+		{
+			get
+			{
+				return this._AccountId;
+			}
+			set
+			{
+				if ((this._AccountId != value))
+				{
+					if (this._Account.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAccountIdChanging(value);
+					this.SendPropertyChanging();
+					this._AccountId = value;
+					this.SendPropertyChanged("AccountId");
+					this.OnAccountIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentsList", DbType="NVarChar(200)")]
+		public string DepartmentsList
+		{
+			get
+			{
+				return this._DepartmentsList;
+			}
+			set
+			{
+				if ((this._DepartmentsList != value))
+				{
+					this.OnDepartmentsListChanging(value);
+					this.SendPropertyChanging();
+					this._DepartmentsList = value;
+					this.SendPropertyChanged("DepartmentsList");
+					this.OnDepartmentsListChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PositionList", DbType="NVarChar(200)")]
+		public string PositionList
+		{
+			get
+			{
+				return this._PositionList;
+			}
+			set
+			{
+				if ((this._PositionList != value))
+				{
+					this.OnPositionListChanging(value);
+					this.SendPropertyChanging();
+					this._PositionList = value;
+					this.SendPropertyChanged("PositionList");
+					this.OnPositionListChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_Schedule", Storage="_Account", ThisKey="AccountId", OtherKey="AccountId", IsForeignKey=true)]
+		public Account Account
+		{
+			get
+			{
+				return this._Account.Entity;
+			}
+			set
+			{
+				Account previousValue = this._Account.Entity;
+				if (((previousValue != value) 
+							|| (this._Account.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Account.Entity = null;
+						previousValue.Schedules.Remove(this);
+					}
+					this._Account.Entity = value;
+					if ((value != null))
+					{
+						value.Schedules.Add(this);
+						this._AccountId = value.AccountId;
+					}
+					else
+					{
+						this._AccountId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Account");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1853,6 +1873,598 @@ namespace QuanLyDaiHocGiaDinh.Model
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	public partial class p_selectAllEmployeeResult
+	{
+		
+		private int _EmployeeId;
+		
+		private string _FullName;
+		
+		private string _FirstName;
+		
+		private string _LastName;
+		
+		private System.Nullable<System.DateTime> _BirthDate;
+		
+		private string _Address;
+		
+		private string _Ward;
+		
+		private string _District;
+		
+		private string _City;
+		
+		private string _PhoneNumber;
+		
+		private string _Email;
+		
+		private string _Status;
+		
+		private System.Nullable<System.DateTime> _HireDate;
+		
+		private string _PositionName;
+		
+		private string _DepartmentName;
+		
+		private System.Data.Linq.Binary _Image;
+		
+		public p_selectAllEmployeeResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeId", DbType="Int NOT NULL")]
+		public int EmployeeId
+		{
+			get
+			{
+				return this._EmployeeId;
+			}
+			set
+			{
+				if ((this._EmployeeId != value))
+				{
+					this._EmployeeId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="NVarChar(150)")]
+		public string FullName
+		{
+			get
+			{
+				return this._FullName;
+			}
+			set
+			{
+				if ((this._FullName != value))
+				{
+					this._FullName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="NVarChar(100)")]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this._FirstName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="NVarChar(100)")]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this._LastName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BirthDate", DbType="Date")]
+		public System.Nullable<System.DateTime> BirthDate
+		{
+			get
+			{
+				return this._BirthDate;
+			}
+			set
+			{
+				if ((this._BirthDate != value))
+				{
+					this._BirthDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(150)")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this._Address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ward", DbType="NVarChar(10)")]
+		public string Ward
+		{
+			get
+			{
+				return this._Ward;
+			}
+			set
+			{
+				if ((this._Ward != value))
+				{
+					this._Ward = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_District", DbType="NVarChar(100)")]
+		public string District
+		{
+			get
+			{
+				return this._District;
+			}
+			set
+			{
+				if ((this._District != value))
+				{
+					this._District = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="NVarChar(100)")]
+		public string City
+		{
+			get
+			{
+				return this._City;
+			}
+			set
+			{
+				if ((this._City != value))
+				{
+					this._City = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NChar(20)")]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this._PhoneNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(100)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(100)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this._Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HireDate", DbType="Date")]
+		public System.Nullable<System.DateTime> HireDate
+		{
+			get
+			{
+				return this._HireDate;
+			}
+			set
+			{
+				if ((this._HireDate != value))
+				{
+					this._HireDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PositionName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string PositionName
+		{
+			get
+			{
+				return this._PositionName;
+			}
+			set
+			{
+				if ((this._PositionName != value))
+				{
+					this._PositionName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentName", DbType="NVarChar(150)")]
+		public string DepartmentName
+		{
+			get
+			{
+				return this._DepartmentName;
+			}
+			set
+			{
+				if ((this._DepartmentName != value))
+				{
+					this._DepartmentName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image", DbType="Image")]
+		public System.Data.Linq.Binary Image
+		{
+			get
+			{
+				return this._Image;
+			}
+			set
+			{
+				if ((this._Image != value))
+				{
+					this._Image = value;
+				}
+			}
+		}
+	}
+	
+	public partial class p_selectEmployeeResult
+	{
+		
+		private int _EmployeeId;
+		
+		private string _FullName;
+		
+		private string _FirstName;
+		
+		private string _LastName;
+		
+		private System.Nullable<System.DateTime> _BirthDate;
+		
+		private string _Address;
+		
+		private string _Ward;
+		
+		private string _District;
+		
+		private string _City;
+		
+		private string _PhoneNumber;
+		
+		private string _Email;
+		
+		private string _Status;
+		
+		private System.Nullable<System.DateTime> _HireDate;
+		
+		private string _PositionName;
+		
+		private string _DepartmentName;
+		
+		private System.Data.Linq.Binary _Image;
+		
+		public p_selectEmployeeResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeId", DbType="Int NOT NULL")]
+		public int EmployeeId
+		{
+			get
+			{
+				return this._EmployeeId;
+			}
+			set
+			{
+				if ((this._EmployeeId != value))
+				{
+					this._EmployeeId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="NVarChar(150)")]
+		public string FullName
+		{
+			get
+			{
+				return this._FullName;
+			}
+			set
+			{
+				if ((this._FullName != value))
+				{
+					this._FullName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="NVarChar(100)")]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this._FirstName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="NVarChar(100)")]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this._LastName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BirthDate", DbType="Date")]
+		public System.Nullable<System.DateTime> BirthDate
+		{
+			get
+			{
+				return this._BirthDate;
+			}
+			set
+			{
+				if ((this._BirthDate != value))
+				{
+					this._BirthDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(150)")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this._Address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ward", DbType="NVarChar(10)")]
+		public string Ward
+		{
+			get
+			{
+				return this._Ward;
+			}
+			set
+			{
+				if ((this._Ward != value))
+				{
+					this._Ward = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_District", DbType="NVarChar(100)")]
+		public string District
+		{
+			get
+			{
+				return this._District;
+			}
+			set
+			{
+				if ((this._District != value))
+				{
+					this._District = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="NVarChar(100)")]
+		public string City
+		{
+			get
+			{
+				return this._City;
+			}
+			set
+			{
+				if ((this._City != value))
+				{
+					this._City = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NChar(20)")]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this._PhoneNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(100)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(100)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this._Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HireDate", DbType="Date")]
+		public System.Nullable<System.DateTime> HireDate
+		{
+			get
+			{
+				return this._HireDate;
+			}
+			set
+			{
+				if ((this._HireDate != value))
+				{
+					this._HireDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PositionName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string PositionName
+		{
+			get
+			{
+				return this._PositionName;
+			}
+			set
+			{
+				if ((this._PositionName != value))
+				{
+					this._PositionName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentName", DbType="NVarChar(150)")]
+		public string DepartmentName
+		{
+			get
+			{
+				return this._DepartmentName;
+			}
+			set
+			{
+				if ((this._DepartmentName != value))
+				{
+					this._DepartmentName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image", DbType="Image")]
+		public System.Data.Linq.Binary Image
+		{
+			get
+			{
+				return this._Image;
+			}
+			set
+			{
+				if ((this._Image != value))
+				{
+					this._Image = value;
+				}
 			}
 		}
 	}

@@ -9,8 +9,12 @@ namespace QuanLyDaiHocGiaDinh.Interface
 {
     interface IEmployee
     {
-        void CreateEmployee();
+        void CreateEmployee(Employee employee);
         void DeleteEmployee(Employee employee);
         void UpdateEmployee(Employee employee);
+        Employee getEmployeeByAccountId(int accountId);
+        List<Employee> getEmployeesByPosition(int positionId);
+        List<Employee> getEmployeesByDepartment(int departmentId);
+        List<Employee> getAllEmployees();
     }
 }

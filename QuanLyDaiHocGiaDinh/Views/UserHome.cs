@@ -9,27 +9,33 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraScheduler;
-using System.Data.Linq;
+using QuanLyDaiHocGiaDinh.Services;
+using QuanLyDaiHocGiaDinh.Controller;
 using QuanLyDaiHocGiaDinh.Model;
 
 namespace QuanLyDaiHocGiaDinh.Views
 {
     public partial class UserHome : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        private int AccountId = 0;
-        public UserHome()
-        {
-            InitializeComponent();
-            setVisibleScheduleRibbonPage(false);
-            this.scheduleTableAdapter.Fill(this.giaDinhUniversityDataSet.Schedule, AccountId);
-        }
+        private Account _account;
 
-        public UserHome(int AccountNo)
+        public UserHome(Account account)
         {
-            AccountId = AccountNo;
+            //Ví dụ để lấy employee đang đăng nhập
+            EmployeeService employeeService = new EmployeeService(account);
+            Employee employee = new Employee();
+            employee = employeeService.getEmployeeByAccountId();//lấy employee đang đăng nhập
+            employee.FullName = "Việt Anh Update 3";
+            employee.FirstName = "Việt Nè";
+            employeeService.updateEmployee(employee);//ví dụ về cập nhật
+
+
+            Console.WriteLine(employeeService.getEmployeeByAccountId().FullName);
+            ////////////
+            this._account = account;
             InitializeComponent();
             setVisibleScheduleRibbonPage(false);
-            this.scheduleTableAdapter.Fill(this.giaDinhUniversityDataSet.Schedule, AccountId);
+            this.scheduleTableAdapter.Fill(this.giaDinhUniversityDataSet.Schedule, this._account.AccountId);
         }
 
         void navBarControl_ActiveGroupChanged(object sender, DevExpress.XtraNavBar.NavBarGroupEventArgs e)
@@ -60,7 +66,7 @@ namespace QuanLyDaiHocGiaDinh.Views
 
         private void schedulerControl_InitNewAppointment(object sender, AppointmentEventArgs e)
         {
-            e.Appointment.CustomFields["AccountId"] = AccountId;
+            e.Appointment.CustomFields["AccountId"] = this._account.AccountId;
         }
 
         private void setVisibleScheduleRibbonPage(bool status)
@@ -73,87 +79,6 @@ namespace QuanLyDaiHocGiaDinh.Views
         private void setVisibleHomeRibbonPage(bool status)
         {
             homeRibbonPage.Visible = status;
-        }
-
-
-        private void panelControl3_Paint(object sender, PaintEventArgs e)
-        {
-       
-
-            using (Model.LinQDataContext db =new Model.LinQDataContext())
-            {
-                dataGridView1.DataSource = from u in db.Employees select u;
-                Services.AccountServices accountServices = new Services.AccountServices();
-                    List<Account> accounts = accountServices.GetAllAccounts();
-                accounts.ForEach(x =>
-                {
-
-
-                    txtEmployeeID.DataBindings.Clear();
-                    txtEmployeeID.DataBindings.Add("TEXT", dataGridView1.DataSource, "EmployeeId").ToString();
-
-                    txtFirstName.DataBindings.Clear();
-                    txtFirstName.DataBindings.Add("TEXT", dataGridView1.DataSource, "FirstName").ToString();
-
-                    txtLastName.DataBindings.Clear();
-                    txtLastName.DataBindings.Add("TEXT", dataGridView1.DataSource, "LastName").ToString();
-
-                    txtFullName.DataBindings.Clear();
-                    txtFullName.DataBindings.Add("TEXT", dataGridView1.DataSource, "FullName").ToString();
-
-                    txtPhoneNumber.DataBindings.Clear();
-                    txtPhoneNumber.DataBindings.Add("TEXT", dataGridView1.DataSource, "PhoneNumber").ToString();
-
-                    txtAddress.DataBindings.Clear();
-                    txtAddress.DataBindings.Add("TEXT", dataGridView1.DataSource, "Address").ToString();
-
-                    txtCity.DataBindings.Clear();
-                    txtCity.DataBindings.Add("TEXT", dataGridView1.DataSource, "City").ToString();
-
-                    txtDistrict.DataBindings.Clear();
-                    txtDistrict.DataBindings.Add("TEXT", dataGridView1.DataSource, "District").ToString();
-
-                    txtEmail.DataBindings.Clear();
-                    txtEmail.DataBindings.Add("TEXT", dataGridView1.DataSource, "Email").ToString();
-
-                    txtHireDate.DataBindings.Clear();
-                    txtHireDate.DataBindings.Add("TEXT", dataGridView1.DataSource, "HireDate").ToString();
-
-                    txtStatus.DataBindings.Clear();
-                    txtStatus.DataBindings.Add("TEXT", dataGridView1.DataSource, "Status").ToString();
-
-                    txtWard.DataBindings.Clear();
-                    txtWard.DataBindings.Add("TEXT", dataGridView1.DataSource, "Ward").ToString();
-                });
-
-            }
-
-        }
-        
-       
-
-        private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-
-        }
-
-  
-
-        private void btnUpdates_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            UserHomeUpdate userupdate = new UserHomeUpdate();
-            userupdate.ShowDialog();
-        }
-
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnChangesPassword_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            UserHomeChangePassword userHomeChangePassword = new UserHomeChangePassword();
-            userHomeChangePassword.ShowDialog();
         }
     }
 }

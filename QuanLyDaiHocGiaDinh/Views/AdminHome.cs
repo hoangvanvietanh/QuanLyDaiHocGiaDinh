@@ -9,20 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraScheduler;
+using QuanLyDaiHocGiaDinh.Model;
 
 namespace QuanLyDaiHocGiaDinh.Views
 {
     public partial class AdminHome : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        //private int AccountId = 0;
+        private Account _account;
 
-        public AdminHome()
+        public AdminHome(Account account)
         {
-            InitializeComponent();
-        }
-
-        public AdminHome(int accountId)
-        {
+            this._account = account;
             InitializeComponent();
             setVisibleScheduleRibbonPage(false);
         }
@@ -54,11 +51,7 @@ namespace QuanLyDaiHocGiaDinh.Views
 
         }
 
-        private void officeNavigationBar_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        //Hiển thị menu của Schedule (lịch trình)
         private void setVisibleScheduleRibbonPage(bool status)
         {
             fileScheduleRibbonPage.Visible = status;
@@ -66,6 +59,7 @@ namespace QuanLyDaiHocGiaDinh.Views
             viewScheduleRibbonPage.Visible = status;
         }
 
+        //Hiển thị menu của Employee (Nhân viên)
         private void setVisibleEmployeeRibbonPage(bool status)
         {
             employeeHomeRibbonPage.Visible = status;

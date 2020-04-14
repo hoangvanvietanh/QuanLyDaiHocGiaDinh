@@ -12,6 +12,7 @@ namespace QuanLyDaiHocGiaDinh.Interface
         void CreateAccount(Account account);
         void DeleteAccount(Account account);
         void UpdateAccount(Account account);
+        Account getAccountByEmployeeId(int employeeId);
         List<Account> GetAllAccounts();
     }
 }
